@@ -1,0 +1,203 @@
+/* Colors used in design.
+*   primary: #0078aa;
+*   dark: #363636;
+*   light: #fff;
+*/
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  color: #363636;
+}
+
+header {
+  background-color: #0078aa;
+  color: #fff;
+  padding: 1em 0;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  padding: 0.5em 1em;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+nav a:hover {
+  background-color: #005f8a;
+}
+
+.logo {
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.main-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4em 2em;
+  margin-top: 4em;
+  background: url('img/desktop.png') no-repeat center center/cover;
+  color: #fff;
+}
+
+.main-banner .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.text-content {
+  flex: 1;
+  padding-right: 2em;
+}
+
+.image-content {
+  flex: 1;
+  text-align: right;
+}
+
+.about-section {
+  padding: 4em 2em;
+  text-align: center;
+  background: url('img/tablet.png') no-repeat center center/cover;
+  color: #fff;
+}
+
+.services-section {
+  padding: 4em 2em;
+  text-align: center;
+  background: url('img/services_bg.jpg') no-repeat center center/cover;
+  color: #fff;
+}
+
+.pricing-section {
+  padding: 4em 2em;
+  text-align: center;
+  background: url('img/pricing_bg.jpg') no-repeat center center/cover;
+  color: #fff;
+}
+
+.contact-section {
+  padding: 4em 2em;
+  text-align: center;
+  background: url('img/mobile.png') no-repeat center center/cover;
+  color: #fff;
+}
+
+.service-icons {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.service-icons img {
+  max-width: 100px;
+}
+
+.pricing-options {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.pricing-card {
+  padding: 1em;
+  border: 1px solid #0078aa;
+  margin: 1em;
+  max-width: 200px;
+  background: #fff;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+form label {
+  margin: 0.5em 0;
+  color: #fff;
+}
+
+form input, form button {
+  margin: 0.5em 0;
+  padding: 0.5em;
+}
+
+button.up {
+  position: fixed;
+  bottom: 1em;
+  right: 1em;
+  background-color: #0078aa;
+  color: #fff;
+  border: none;
+  padding: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button.up:hover {
+  background-color: #005f8a;
+}
+
+/* Media Queries */
+@media (max-width: 767px) {
+  .service-icons img, .pricing-card {
+    max-width: 50px;
+  }
+
+  .main-banner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .main-banner .container {
+    flex-direction: column;
+  }
+
+  .text-content, .image-content {
+    padding: 0;
+  }
+
+  .image-content {
+    text-align: center;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1279px) {
+  .service-icons img, .pricing-card {
+    max-width: 75px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .service-icons img, .pricing-card {
+    max-width: 100px;
+  }
+}
