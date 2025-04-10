@@ -1,203 +1,448 @@
-/* Colors used in design.
-*   primary: #0078aa;
-*   dark: #363636;
-*   light: #fff;
-*/
+/*  Universal Reset Rules  */
+img,
+a img {
+  border: 0 none !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  display: block;
+}
+
+*:focus,
+*:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
 body {
-  font-family: 'Montserrat', sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #fff;
-  color: #363636;
+  background: #fff;
+  color: #000;
+  padding-top: 80px;
 }
 
+/*  Header  */
 header {
-  background-color: #0078aa;
-  color: #fff;
-  padding: 1em 0;
   position: fixed;
-  width: 100%;
   top: 0;
   left: 0;
+  width: 100%;
+  background: #fff;
   z-index: 1000;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-nav {
+.navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-nav ul {
+.nav-links {
+  list-style: none;
   display: flex;
+}
+
+.nav-links li {
+  margin-left: 20px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #000;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: #5dc8d4;
+}
+
+/*  Up Button  */
+.up-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #5dc8d4;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 8px;
+  text-decoration: none;
+  z-index: 1100;
+  transition: background 0.3s;
+}
+
+.up-button img {
+  width: 24px;
+  height: auto;
+}
+
+.up-button:hover {
+  background: #4bb3bf;
+}
+
+/*  Hero Section  */
+.hero {
+  scroll-margin-top: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 50px auto;
+  text-align: center;
+}
+
+.hero-text {
+  max-width: 50%;
+}
+
+.hero-text h1 {
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.hero-text p {
+  margin: 15px 0;
+  color: #777;
+}
+
+.feature-icons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.feature-icons img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.hero-image img {
+  max-width: 100%;
+}
+
+/*  About Clinic Section  */
+.about {
+  scroll-margin-top: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 60px auto;
+  padding: 40px;
+}
+
+.about-image {
+  max-width: 500px;
+}
+
+.about-image img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.about-content {
+  max-width: 600px;
+  text-align: left;
+}
+
+.about-content h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #000;
+}
+
+.about-content .subtitle {
+  color: #00a8ff;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 15px;
+}
+
+.about-content ul {
   list-style: none;
   padding: 0;
-  margin: 0;
 }
 
-nav a {
-  color: #fff;
-  text-decoration: none;
-  padding: 0.5em 1em;
-  transition: background-color 0.3s ease, color 0.3s ease;
+.about-content ul li {
+  margin-bottom: 20px;
 }
 
-nav a:hover {
-  background-color: #005f8a;
+.about-content ul li strong {
+  font-size: 18px;
+  display: block;
+  margin-bottom: 5px;
 }
 
-.logo {
-  font-size: 1.5em;
+/*  Services Section (How We Can Help You)  */
+.services {
+  scroll-margin-top: 80px;
   text-align: center;
+  background: url('../img/services_bg.jpg') no-repeat center center;
+  background-size: cover;
+  padding: 50px 20px;
 }
 
-.main-banner {
+.services h2 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.services p {
+  color: #707070;
+  margin-bottom: 30px;
+}
+
+.services-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.service-box {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.service-box img {
+  width: 50px;
+  margin-bottom: 10px;
+}
+
+.service-box h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.service-box p {
+  color: #777;
+  font-size: 14px;
+}
+
+/*  Special Offers Section (Our Special Offers)  */
+.special-offers {
+  scroll-margin-top: 80px;
+  text-align: center;
+  background: url('../img/pricing_bg.jpg') no-repeat center center !important;
+  background-size: cover !important;
+  padding: 70px 20px;
+}
+
+.special-offers h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.special-offers p {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+.offers-container {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 4em 2em;
-  margin-top: 4em;
-  background: url('img/desktop.png') no-repeat center center/cover;
-  color: #fff;
-}
-
-.main-banner .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.text-content {
-  flex: 1;
-  padding-right: 2em;
-}
-
-.image-content {
-  flex: 1;
-  text-align: right;
-}
-
-.about-section {
-  padding: 4em 2em;
-  text-align: center;
-  background: url('img/tablet.png') no-repeat center center/cover;
-  color: #fff;
-}
-
-.services-section {
-  padding: 4em 2em;
-  text-align: center;
-  background: url('img/services_bg.jpg') no-repeat center center/cover;
-  color: #fff;
-}
-
-.pricing-section {
-  padding: 4em 2em;
-  text-align: center;
-  background: url('img/pricing_bg.jpg') no-repeat center center/cover;
-  color: #fff;
-}
-
-.contact-section {
-  padding: 4em 2em;
-  text-align: center;
-  background: url('img/mobile.png') no-repeat center center/cover;
-  color: #fff;
-}
-
-.service-icons {
-  display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 30px;
   flex-wrap: wrap;
 }
 
-.service-icons img {
-  max-width: 100px;
+.offer-box {
+  background: #fff;
+  padding: 30px 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  width: 320px;
 }
 
-.pricing-options {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
+.offer-box h3 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
 }
 
-.pricing-card {
-  padding: 1em;
-  border: 1px solid #0078aa;
-  margin: 1em;
-  max-width: 200px;
+.price {
+  font-size: 26px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.treatments {
+  font-size: 18px;
+  font-style: italic;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.offer-details {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 20px;
+}
+
+.offer-details li {
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.offer-box button {
+  background: #5dc8d4;
+  color: #fff;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.offer-box button:hover {
+  background: #4bb3bf;
+}
+
+.offer-box.featured {
+  background: #4db7d1;
+}
+
+/*  Appointment Section  */
+.appointment {
+  scroll-margin-top: 80px;
+  padding: 50px 20px;
   background: #fff;
 }
 
-form {
+.appointment-container {
+  width: 80%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  gap: 20px;
+  overflow: visible;
+}
+
+.appointment-image {
+  flex: 1;
+  height: 400px;
+  overflow: hidden;
+}
+
+.appointment-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: bottom;
+}
+
+.appointment-form {
+  flex: 1;
+  padding: 40px;
+  background: #fff;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  justify-content: center;
 }
 
-form label {
-  margin: 0.5em 0;
-  color: #fff;
+.appointment-form h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
 }
 
-form input, form button {
-  margin: 0.5em 0;
-  padding: 0.5em;
+.appointment-form p {
+  font-size: 16px;
+  color: #777;
+  margin-bottom: 30px;
 }
 
-button.up {
-  position: fixed;
-  bottom: 1em;
-  right: 1em;
-  background-color: #0078aa;
-  color: #fff;
+.appointment-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.appointment-form input {
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.appointment-form button {
+  padding: 12px;
+  background-color: #5dc8d4;
   border: none;
-  padding: 1em;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-button.up:hover {
-  background-color: #005f8a;
+.appointment-form button:hover {
+  background-color: #4bb3bf;
 }
 
-/* Media Queries */
-@media (max-width: 767px) {
-  .service-icons img, .pricing-card {
-    max-width: 50px;
-  }
-
-  .main-banner {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .main-banner .container {
-    flex-direction: column;
-  }
-
-  .text-content, .image-content {
-    padding: 0;
-  }
-
-  .image-content {
-    text-align: center;
-  }
+.appointment-form footer {
+  margin-top: 30px;
+  text-align: center;
+  color: #aaa;
+  font-size: 12px;
 }
 
-@media (min-width: 768px) and (max-width: 1279px) {
-  .service-icons img, .pricing-card {
-    max-width: 75px;
+/*  Media Queries  */
+@media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+  }
+  .hero-text,
+  .hero-image {
+    width: 50%;
+  }
+  .about,
+  .appointment-container {
+    flex-direction: row;
   }
 }
 
 @media (min-width: 1280px) {
-  .service-icons img, .pricing-card {
-    max-width: 100px;
+  .navbar,
+  .hero,
+  .about,
+  .appointment-container {
+    max-width: 1280px;
   }
 }
