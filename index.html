@@ -1,324 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/styles.css">
-  <title>Professional Developers Health Care</title>
-  <style>
-    /* Ваши стили CSS */
-    /* Colors used in design.
-    *   primary: #0078aa;
-    *   dark: #363636;
-    *   light: #fff;
-    */
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: 'Montserrat', sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #fff;
-      color: #363636;
-    }
-
-    header {
-      background-color: #0078aa;
-      color: #fff;
-      padding: 1em 0;
-      position: fixed;
-      width: 100%;
-      top: 0;
-      left: 0;
-      z-index: 1000;
-    }
-
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    nav ul {
-      display: flex;
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      padding: 0.5em 1em;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    nav a:hover {
-      background-color: #005f8a;
-    }
-
-    .logo {
-      font-size: 1.5em;
-      text-align: center;
-    }
-
-    .main-banner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 4em 2em;
-      margin-top: 4em;
-      background: url('img/desktop.png') no-repeat center center/cover;
-      color: #fff;
-    }
-
-    .main-banner .container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .text-content {
-      flex: 1;
-      padding-right: 2em;
-    }
-
-    .image-content {
-      flex: 1;
-      text-align: right;
-    }
-
-    .about-section {
-      padding: 4em 2em;
-      text-align: center;
-      background: url('img/tablet.png') no-repeat center center/cover;
-      color: #fff;
-    }
-
-    .services-section {
-      padding: 4em 2em;
-      text-align: center;
-      background: url('img/services_bg.jpg') no-repeat center center/cover;
-      color: #fff;
-    }
-
-    .pricing-section {
-      padding: 4em 2em;
-      text-align: center;
-      background: url('img/pricing_bg.jpg') no-repeat center center/cover;
-      color: #fff;
-    }
-
-    .contact-section {
-      padding: 4em 2em;
-      text-align: center;
-      background: url('img/mobile.png') no-repeat center center/cover;
-      color: #fff;
-    }
-
-    .service-icons {
-      display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
-    }
-
-    .service-icons img {
-      max-width: 100px;
-    }
-
-    .pricing-options {
-      display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
-    }
-
-    .pricing-card {
-      padding: 1em;
-      border: 1px solid #0078aa;
-      margin: 1em;
-      max-width: 200px;
-      background: #fff;
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    form label {
-      margin: 0.5em 0;
-      color: #fff;
-    }
-
-    form input, form button {
-      margin: 0.5em 0;
-      padding: 0.5em;
-    }
-
-    button.up {
-      position: fixed;
-      bottom: 1em;
-      right: 1em;
-      background-color: #0078aa;
-      color: #fff;
-      border: none;
-      padding: 1em;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    button.up:hover {
-      background-color: #005f8a;
-    }
-
-    /* Media Queries */
-    @media (max-width: 767px) {
-      .service-icons img, .pricing-card {
-        max-width: 50px;
-      }
-
-      .main-banner {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .main-banner .container {
-        flex-direction: column;
-      }
-
-      .text-content, .image-content {
-        padding: 0;
-      }
-
-      .image-content {
-        text-align: center;
-      }
-    }
-
-    @media (min-width: 768px) and (max-width: 1279px) {
-      .service-icons img, .pricing-card {
-        max-width: 75px;
-      }
-    }
-
-    @media (min-width: 1280px) {
-      .service-icons img, .pricing-card {
-        max-width: 100px;
-      }
-    }
-
-    .figure {
-      text-align: center;
-      margin: 1em 0;
-    }
-
-    .figure img {
-      max-width: 100%;
-      height: auto;
-    }
-
-    .figure figcaption {
-      margin-top: 0.5em;
-      font-style: italic;
-      color: #555;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Health Care</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
+  <!-- Fixed Header -->
   <header>
-    <nav>
-      <a href="#" class="logo">Logo</a>
-      <ul>
-        <li><a href="#home" class="nav-link">Home</a></li>
-        <li><a href="#about" class="nav-link">About</a></li>
-        <li><a href="#services" class="nav-link">Services</a></li>
-        <li><a href="#pricing" class="nav-link">Pricing</a></li>
-        <li><a href="#contact" class="nav-link">Contact</a></li>
+    <nav class="navbar">
+      <div class="logo">
+        <a href="#home"><img src="img/logo.png" alt="Health Logo" /></a>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#home">HOME</a></li>
+        <li><a href="#about">ABOUT</a></li>
+        <li><a href="#services">SERVICES</a></li>
+        <li><a href="#special-offers">PRICING</a></li>
+        <li><a href="#appointment">CONTACT</a></li>
       </ul>
     </nav>
   </header>
 
-  <section id="home" class="main-banner">
-    <div class="container">
-      <div class="text-content">
-        <h1>Professional Developers Health Care</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit. Erim unde voluptas perspiciatis praesentium velit. Placeat.</p>
+  <!-- Fixed "Up" Button -->
+  <a href="#home" class="up-button">
+    <img src="img/SVG/free-icon-font-angle-up-3916910.svg" alt="Up Button" />
+  </a>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-text">
+      <h1>
+        Professional Developers <br />
+        Health Care
+      </h1>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim unde
+        voluptas perspiciatis praesentium velit. Placeat!
+      </p>
+      <div class="feature-icons">
+        <img src="img/SVG/free-icon-font-heart-3916767.svg" alt="Heart Icon" />
+        <img src="img/SVG/free-icon-font-doctor-3914735.svg" alt="Doctor Icon" />
+        <img src="img/SVG/free-icon-font-financial-health-18646933.svg" alt="Financial Health Icon" />
       </div>
-      <div class="image-content">
-        <img src="img/lady.jpg" alt="Healthcare Professional">
-      </div>
+    </div>
+    <div class="hero-image">
+      <img src="img/lady.jpg" alt="Hero Image" />
     </div>
   </section>
 
-  <section id="about" class="about-section">
-    <h2>About Clinic</h2>
+  <!-- About Clinic Section -->
+  <section class="about" id="about">
+    <div class="about-image">
+      <img src="img/tools.png" alt="About Clinic Image" />
+    </div>
     <div class="about-content">
-      <div>
-        <h3>Medical Consulting</h3>
-        <p>Lorem ipsum dolor sit amet.</p>
+      <h2>About Clinic</h2>
+      <span class="subtitle">PROFESSIONAL CARE</span>
+      <ul>
+        <li>
+          <strong>Medical Consulting</strong>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate deleniti corrupti...</p>
+        </li>
+        <li>
+          <strong>Laboratory Analysis</strong>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate deleniti corrupti...</p>
+        </li>
+        <li>
+          <strong>Diagnostics</strong>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate deleniti corrupti...</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Services Section (How We Can Help You) with Background -->
+  <section class="services" id="services">
+    <h2>How We Can Help You</h2>
+    <p>READ MORE ABOUT OUR SERVICES</p>
+    <div class="services-container">
+      <div class="service-box">
+        <img src="img/icons/oftalmology.jpg" alt="Ophthalmology" />
+        <h3>Ophthalmology</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia ratione molestias labore, odio totam illo.</p>
       </div>
-      <div>
-        <h3>Laboratory Analysis</h3>
-        <p>Lorem ipsum dolor sit amet.</p>
+      <div class="service-box">
+        <img src="img/icons/dentistry.jpg" alt="Dentistry" />
+        <h3>Dentistry</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia ratione molestias labore, odio totam illo.</p>
       </div>
-      <div>
-        <h3>Diagnostics</h3>
-        <p>Lorem ipsum dolor sit amet.</p>
+      <div class="service-box">
+        <img src="img/icons/cardiology.jpg" alt="Cardiology" />
+        <h3>Cardiology</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia ratione molestias labore, odio totam illo.</p>
+      </div>
+      <div class="service-box">
+        <img src="img/icons/pediatrics.jpg" alt="Pediatrics" />
+        <h3>Pediatrics</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia ratione molestias labore, odio totam illo.</p>
+      </div>
+      <div class="service-box">
+        <img src="img/icons/laboratory.jpg" alt="Laboratory" />
+        <h3>Laboratory</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia ratione molestias labore, odio totam illo.</p>
+      </div>
+      <div class="service-box">
+        <img src="img/icons/radiology.jpg" alt="Radiology" />
+        <h3>Radiology</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia ratione molestias labore, odio totam illo.</p>
       </div>
     </div>
   </section>
 
-  <section id="services" class="services-section">
-    <h2>How we can help you</h2>
-    <div class="service-icons">
-      <div>
-        <img src="img/icons/oftalmology.jpg" alt="Ophthalmology">
-        <p>Ophthalmology</p>
-      </div>
-      <div>
-        <img src="img/icons/dentistry.jpg" alt="Dentistry">
-        <p>Dentistry</p>
-      </div>
-      <div>
-        <img src="img/icons/cardiology.jpg" alt="Cardiology">
-        <p>Cardiology</p>
-      </div>
-      <div>
-        <img src="img/icons/pediatrics.jpg" alt="Pediatrics">
-        <p>Pediatrics</p>
-      </div>
-      <div>
-        <img src="img/icons/laboratory.jpg" alt="Laboratory">
-        <p>Laboratory</p>
-      </div>
-      <div>
-        <img src="img/icons/radiology.jpg" alt="Radiology">
-        <p>Radiology</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="pricing" class="pricing-section">
+  <!-- Special Offers Section (Our Special Offers) with Background -->
+  <section class="special-offers" id="special-offers">
     <h2>Our Special Offers</h2>
-    <div class="pricing-options">
-      <div class="pricing-card">
+    <p>START TO BE HEALTHY TODAY</p>
+    <div class="offers-container">
+      <div class="offer-box">
         <h3>Allergy Check</h3>
-        <p>Special Price: $50</p>
+        <p class="price">$255</p>
+        <p class="treatments">10 treatments</p>
+        <ul class="offer-details">
+          <li>Allergy Test</li>
+          <li>Consultation</li>
+          <li>Follow-up</li>
+          <li>Test Results</li>
+        </ul>
         <button>Get Now</button>
       </div>
-      <div class="pricing-card">
+      <div class="offer-box featured">
         <h3>Eye Checkup</h3>
-        <p>Special Price: $70</p>
+        <p class="price">$108</p>
+        <p class="treatments">3 treatments</p>
+        <ul class="offer-details">
+          <li>Vision Test</li>
+          <li>Exam &amp; Prescription</li>
+          <li>Consultation</li>
+        </ul>
         <button>Get Now</button>
       </div>
-      <div class="pricing-card">
+      <div class="offer-box">
         <h3>Dental Care</h3>
-        <p>Special Price: $80</p>
+        <p class="price">$320</p>
+        <p class="treatments">6 treatments</p>
+        <ul class="offer-details">
+          <li>Consultation</li>
+          <li>Teeth Cleaning</li>
+          <li>Filling/Procedure</li>
+          <li>Aftercare</li>
+        </ul>
         <button>Get Now</button>
       </div>
     </div>
   </section>
+
+  <!-- Make An Appointment Section -->
+  <section class="appointment" id="appointment">
+    <div class="appointment-container">
+      <div class="appointment-image">
+        <img src="img/contact_image.jpg" alt="Contact Image" />
+      </div>
+      <div class="appointment-form">
+        <h2>Make An Appointment</h2>
+        <p>AND WE WILL CONTACT YOU</p>
+        <form action="#" method="post">
+          <input type="text" name="fullname" placeholder="Full Name" required />
+          <input type="email" name="email" placeholder="Email" required />
+          <input type="date" name="date" required />
+          <input type="tel" name="phone" placeholder="Phone" required />
+          <input list="subjects" name="subject" placeholder="Subject" required />
+          <datalist id="subjects">
+            <option value="General Inquiry" />
+            <option value="Appointment Request" />
+            <option value="Service Question" />
+          </datalist>
+          <button type="submit">Submit</button>
+        </form>
+        <footer>
+          <p>&copy; 2025</p>
+        </footer>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
