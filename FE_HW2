@@ -1,0 +1,292 @@
+// homework/js/index.js
+
+// === КОНСТАНТЫ ===
+const API     = 'https://jsonplaceholder.typicode.com/users';
+const CARD_W  = 360;
+const CARD_H  = 80;
+const OVERLAP = 80;
+
+// === Локальное хранилище данных ===
+let usersData = [];
+
+/** Утилита для создания элемента с props и стилями */
+function createEl(tag, props = {}, styles = {}) {
+  const el = document.createElement(tag);
+  Object.assign(el, props);
+  Object.assign(el.style, styles);
+  return el;
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  // 1) Контейнер и спиннер
+  const container = createEl('div', {}, {
+    position:  'relative',
+    width:     `${CARD_W}px`,
+    margin:    '40px auto',
+    overflowY: 'auto'
+  });
+  document.body.appendChild(container);
+
+  const spinner = createEl('div', {}, {
+    position:      'fixed',
+    top:           '50%',
+    left:          '50%',
+    transform:     'translate(-50%,-50%)',
+    width:         '48px',
+    height:        '48px',
+    border:        '6px solid #ddd',
+    borderTop:     '6px solid #3498db',
+    borderRadius:  '50%',
+    animation:     'spin 1s linear infinite',
+    display:       'none',
+    zIndex:        '1000'
+  });
+  document.body.appendChild(spinner);
+
+  // keyframes для спиннера
+  const kf = createEl('style');
+  kf.textContent = `
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  `;
+  document.head.appendChild(kf);
+
+  function showSpinner() { spinner.style.display = 'block'; }
+  function hideSpinner() { spinner.style.display = 'none'; }
+
+  // 2) Загрузка данных и начальный рендер
+  async function fetchAndRender() {
+    showSpinner();
+    try {
+      const res = await fetch(API);
+      if (!res.ok) throw new Error(`Fetch failed ${res.status}`);
+      usersData = await res.json();
+      renderStack();
+    } catch (err) {
+      console.error(err);
+      alert('Ошибка загрузки. Проверьте соединение.');
+    } finally {
+      hideSpinner();
+    }
+  }
+
+  // 3) Рендер стопки карточек
+  function renderStack() {
+    container.style.height = `${(usersData.length - 1) * OVERLAP + CARD_H + 40}px`;
+    container.innerHTML = '';
+
+    usersData.forEach((u, idx) => {
+      // Карточка
+      const card = createEl('div', {}, {
+        position:   'absolute',
+        top:        `${idx * OVERLAP}px`,
+        left:       '0',
+        width:      '100%',
+        height:     `${CARD_H}px`,
+        background: '#fff',
+        borderRadius: '8px',
+        boxShadow:  '0 4px 12px rgba(0,0,0,0.1)',
+        overflow:   'visible',
+        transition: 'height 0.3s, z-index 0.3s',
+        cursor:     'pointer',
+        zIndex:     '1'
+      });
+
+      // Заголовок
+      const hdr = createEl('div', {}, {
+        padding:   '16px',
+        textAlign: 'center'
+      });
+      hdr.innerHTML = `
+        <strong style="display:block;font-size:1.1rem">${u.name}</strong>
+        <small style="color:#666">@${u.username}</small>
+      `;
+
+      // Панель деталей
+      const details = createEl('div', {}, {
+        display:        'flex',
+        justifyContent: 'space-around',
+        background:     '#f0f0f0',
+        padding:        '24px 0',
+        marginTop:      '24px',
+        borderTop:      '1px solid #ddd',
+        opacity:        '0',
+        maxHeight:      '0',
+        transition:     'opacity 0.3s, max-height 0.3s'
+      });
+      ['phone','website','email'].forEach(field => {
+        const col = createEl('div', {}, {
+          textAlign: 'center',
+          flex:      '1'
+        });
+        col.innerHTML = `
+          <span style="display:block;font-size:.75rem;color:#555;text-transform:uppercase">
+            ${field}
+          </span>
+          <span style="display:block;margin-top:8px;font-size:1rem;color:#333">
+            ${u[field]}
+          </span>
+        `;
+        details.appendChild(col);
+      });
+
+      // Кнопки Edit/Delete
+      const controls = createEl('div', {}, {
+        position:       'absolute',
+        right:          '16px',
+        opacity:        '0',
+        pointerEvents:  'none',
+        display:        'flex',
+        gap:            '8px',
+        transition:     'opacity 0.3s'
+      });
+      // EDIT
+      const editBtn = createEl('button', { textContent: 'EDIT' }, {
+        padding:      '6px 12px',
+        border:       'none',
+        borderRadius: '4px',
+        cursor:       'pointer',
+        fontSize:     '.85rem',
+        color:        '#fff',
+        background:   '#ffd600'
+      });
+      editBtn.addEventListener('click', e => {
+        e.stopPropagation();
+        openEditPanel(u);
+      });
+      // DELETE
+      const deleteBtn = createEl('button', { textContent: 'DELETE' }, {
+        padding:      '6px 12px',
+        border:       'none',
+        borderRadius: '4px',
+        cursor:       'pointer',
+        fontSize:     '.85rem',
+        color:        '#fff',
+        background:   '#e53935'
+      });
+      deleteBtn.addEventListener('click', e => {
+        e.stopPropagation();
+        deleteUser(u.id);
+      });
+
+      controls.append(editBtn, deleteBtn);
+      card.append(hdr, details, controls);
+      container.appendChild(card);
+
+      // Располагаем кнопки над панелью
+      const panelY = details.offsetTop;
+      const ctlH   = controls.offsetHeight;
+      controls.style.top = `${panelY - ctlH - 8}px`;
+
+      // Hover-эффект
+      card.addEventListener('pointerenter', () => {
+        card.style.height        = 'auto';
+        card.style.zIndex        = '100';
+        details.style.opacity    = '1';
+        details.style.maxHeight  = '500px';
+        controls.style.opacity       = '1';
+        controls.style.pointerEvents = 'auto';
+      });
+      card.addEventListener('pointerleave', () => {
+        card.style.height        = `${CARD_H}px`;
+        card.style.zIndex        = '1';
+        details.style.opacity    = '0';
+        details.style.maxHeight  = '0';
+        controls.style.opacity       = '0';
+        controls.style.pointerEvents = 'none';
+      });
+    });
+  }
+
+  // Удаление пользователя
+  async function deleteUser(id) {
+    if (!confirm('Удалить пользователя?')) return;
+    showSpinner();
+    try {
+      const res = await fetch(`${API}/${id}`, { method: 'DELETE' });
+      if (!res.ok) throw new Error(`Delete failed ${res.status}`);
+      usersData = usersData.filter(u => u.id !== id);
+      renderStack();
+    } catch (err) {
+      console.error(err);
+      alert('Ошибка при удалении.');
+    } finally {
+      hideSpinner();
+    }
+  }
+
+  // Панель редактирования справа
+  function openEditPanel(user) {
+    const old = document.getElementById('edit-panel');
+    if (old) old.remove();
+
+    const panel = createEl('div', { id: 'edit-panel' }, {
+      position:    'fixed',
+      top:         '0',
+      right:       '-320px',
+      width:       '300px',
+      height:      '100%',
+      background:  '#fff',
+      boxShadow:   '-4px 0 12px rgba(0,0,0,0.1)',
+      padding:     '20px',
+      transition:  'right 0.3s',
+      zIndex:      '2000',
+      overflowY:   'auto'
+    });
+    panel.innerHTML = `
+      <h3>Edit Profile</h3>
+      <label>Name:</label>
+      <input id="fName" value="${user.name}" style="width:100%;margin-bottom:12px;padding:6px" />
+      <label>Username:</label>
+      <input id="fUser" value="${user.username}" style="width:100%;margin-bottom:12px;padding:6px" />
+      <label>Phone:</label>
+      <input id="fPhone" value="${user.phone}" style="width:100%;margin-bottom:12px;padding:6px" />
+      <label>Website:</label>
+      <input id="fSite" value="${user.website}" style="width:100%;margin-bottom:12px;padding:6px" />
+      <label>Email:</label>
+      <input id="fEmail" value="${user.email}" style="width:100%;margin-bottom:20px;padding:6px" />
+      <div style="text-align:right">
+        <button id="saveBtn" style="padding:8px 16px;margin-right:8px;background:#4caf50;color:#fff;border:none;border-radius:4px;cursor:pointer">SAVE</button>
+        <button id="cancelBtn" style="padding:8px 16px;background:#aaa;color:#fff;border:none;border-radius:4px;cursor:pointer">CANCEL</button>
+      </div>
+    `;
+    document.body.appendChild(panel);
+    requestAnimationFrame(() => { panel.style.right = '0'; });
+
+    panel.querySelector('#cancelBtn').onclick = () => panel.remove();
+
+    panel.querySelector('#saveBtn').onclick = async () => {
+      const updated = {
+        ...user,
+        name:     panel.querySelector('#fName').value,
+        username: panel.querySelector('#fUser').value,
+        phone:    panel.querySelector('#fPhone').value,
+        website:  panel.querySelector('#fSite').value,
+        email:    panel.querySelector('#fEmail').value
+      };
+      showSpinner();
+      try {
+        const res = await fetch(`${API}/${user.id}`, {
+          method:  'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body:    JSON.stringify(updated)
+        });
+        if (!res.ok) throw new Error(`Update failed ${res.status}`);
+        const data = await res.json();
+        usersData = usersData.map(u => u.id === data.id ? data : u);
+        renderStack();
+        panel.remove();
+      } catch (err) {
+        console.error(err);
+        alert('Ошибка при сохранении.');
+      } finally {
+        hideSpinner();
+      }
+    };
+  }
+
+  // Старт
+  fetchAndRender();
+});
